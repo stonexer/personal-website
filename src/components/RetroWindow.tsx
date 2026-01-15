@@ -10,6 +10,9 @@ interface RetroWindowProps {
   height?: number;
   width?: number;
   onClose?: () => void;
+  zIndex?: number;
+  onFocus?: () => void;
+  windowId?: string;
 }
 
 export default function RetroWindow({
@@ -21,7 +24,10 @@ export default function RetroWindow({
   minWidth = 300,
   height,
   width,
-  onClose
+  onClose,
+  zIndex,
+  onFocus,
+  windowId
 }: RetroWindowProps) {
   // If initialPosition is provided, we don't use alignment
   const [alignment, setAlignment] = useState<string | null>(initialPosition ? null : defaultAlignment);
@@ -263,6 +269,7 @@ export default function RetroWindow({
     // Prevent drag if clicking close button
     if ((e.target as HTMLElement).closest('.close-box')) return;
 
+    onFocus?.();
     if (windowRef.current) {
       const rect = windowRef.current.getBoundingClientRect();
       setDragOffset({
@@ -292,6 +299,7 @@ export default function RetroWindow({
     // Prevent drag if touching close button
     if ((e.target as HTMLElement).closest('.close-box')) return;
 
+    onFocus?.();
     if (windowRef.current && e.touches.length > 0) {
       const touch = e.touches[0];
       const rect = windowRef.current.getBoundingClientRect();
@@ -353,11 +361,12 @@ export default function RetroWindow({
 
   return (
     <div
-      className="absolute z-[1000] flex resize flex-col overflow-hidden border border-black bg-[#fefdf9] font-['Chicago','Geneva','Charcoal','Helvetica',sans-serif] shadow-[2px_2px_0_rgba(0,0,0,0.55),_4px_4px_0_rgba(0,0,0,0.25)] box-border"
+      className="absolute flex resize flex-col overflow-hidden border border-black bg-[#fefdf9] font-['Chicago','Geneva','Charcoal','Helvetica',sans-serif] shadow-[2px_2px_0_rgba(0,0,0,0.55),_4px_4px_0_rgba(0,0,0,0.25)] box-border"
       style={{
         left: alignment === 'center' ? '50%' : (alignment === 'top-right' ? 'auto' : position.x),
         top: alignment === 'center' ? '50%' : (alignment === 'top-right' ? '20px' : position.y),
         right: alignment === 'top-right' ? '20px' : 'auto',
+        zIndex: zIndex ?? 1000,
         minHeight,
         minWidth,
         height,
@@ -368,6 +377,7 @@ export default function RetroWindow({
         willChange: isDragging ? 'transform' : 'auto'
       } as React.CSSProperties}
       ref={windowRef}
+      data-window-id={windowId}
     >
       <div
         className="relative flex h-5 cursor-grab select-none items-center border-b border-black px-2 active:cursor-grabbing"
