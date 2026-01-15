@@ -362,6 +362,8 @@ export default function RetroWindow({
   return (
     <div
       className="absolute flex resize flex-col overflow-hidden border border-black bg-[#fefdf9] font-['Chicago','Geneva','Charcoal','Helvetica',sans-serif] shadow-[2px_2px_0_rgba(0,0,0,0.55),_4px_4px_0_rgba(0,0,0,0.25)] box-border"
+      onMouseDownCapture={() => onFocus?.()}
+      onTouchStartCapture={() => onFocus?.()}
       style={{
         left: alignment === 'center' ? '50%' : (alignment === 'top-right' ? 'auto' : position.x),
         top: alignment === 'center' ? '50%' : (alignment === 'top-right' ? '20px' : position.y),
@@ -380,7 +382,7 @@ export default function RetroWindow({
       data-window-id={windowId}
     >
       <div
-        className="relative flex h-5 cursor-grab select-none items-center border-b border-black px-2 active:cursor-grabbing"
+        className="relative flex h-5 cursor-grab select-none items-center border-b border-black px-2 active:cursor-grabbing touch-none"
         style={{
           backgroundImage:
             'repeating-linear-gradient(180deg, #ffffff 0px, #ffffff 1px, #000000 1px, #000000 2px)',

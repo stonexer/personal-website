@@ -44,7 +44,7 @@ export default function App() {
       <GridBackground />
       <RetroWindow
         title="Archived V1"
-        initialPosition={{ x: 584, y: 528 }}
+        initialPosition={{ x: 488, y: 512 }}
         minHeight={360}
         minWidth={300}
         height={420}
@@ -60,7 +60,7 @@ export default function App() {
       </RetroWindow>
       <RetroWindow
         title="Vinyl Player"
-        initialPosition={{ x: 208, y: 392 }}
+        initialPosition={{ x: 88, y: 360 }}
         height={290}
         width={300}
         zIndex={zOrder.vinyl}

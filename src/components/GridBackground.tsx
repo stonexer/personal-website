@@ -4,14 +4,28 @@ const GridBackground: React.FC = () => {
   const cellsRef = useRef<Map<string, number>>(new Map());
   const [, forceRender] = useState(0);
   const [drawMode, setDrawMode] = useState<'add' | 'remove' | null>(null);
-  const [windowHeight, setWindowHeight] = useState(typeof window !== 'undefined' ? window.innerHeight : 800);
+  const [viewport, setViewport] = useState({
+    width: typeof window !== 'undefined' ? (window.visualViewport?.width ?? window.innerWidth) : 1200,
+    height: typeof window !== 'undefined' ? (window.visualViewport?.height ?? window.innerHeight) : 800
+  });
+  const [isMounted, setIsMounted] = useState(false);
 
   const lastPos = useRef<{ x: number; y: number } | null>(null);
 
   React.useEffect(() => {
-    const handleResize = () => setWindowHeight(window.innerHeight);
+    setIsMounted(true);
+    const handleResize = () => {
+      setViewport({
+        width: window.visualViewport?.width ?? window.innerWidth,
+        height: window.visualViewport?.height ?? window.innerHeight
+      });
+    };
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.visualViewport?.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.visualViewport?.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const fadeDurationMs = 4500;
@@ -151,7 +165,7 @@ const GridBackground: React.FC = () => {
 
   return (
     <div
-      className="fixed inset-0 h-screen w-screen"
+      className="fixed inset-0"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -161,6 +175,9 @@ const GridBackground: React.FC = () => {
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
       style={{
+        height: '100dvh',
+        width: '100vw',
+        minHeight: '100vh',
         // zIndex: 0, // Ensure it's not buried too deep, but behind content if content has z-index
         backgroundImage: `
           linear-gradient(to right, rgba(110, 90, 85, 0.15) 1px, transparent 1px),
@@ -187,8 +204,8 @@ const GridBackground: React.FC = () => {
         })}
         {/* Blinking Prompt */}
         <div className="pointer-events-none">
-            {(() => {
-                const rows = Math.floor(windowHeight / 8);
+            {isMounted && (() => {
+                const rows = Math.floor(viewport.height / 8);
                 const startX = 4;
                 const startY = rows - 10; // Moved up to accommodate larger size
 
