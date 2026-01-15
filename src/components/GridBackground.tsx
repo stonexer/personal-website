@@ -94,18 +94,19 @@ const GridBackground: React.FC = () => {
     return points;
   };
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
     const x = Math.floor(e.clientX / 8);
     const y = Math.floor(e.clientY / 8);
-    // Determine mode based on the clicked cell
     const key = `${x},${y}`;
     const mode = cellsRef.current.has(key) ? 'remove' : 'add';
     setDrawMode(mode);
     lastPos.current = { x, y };
     updateCells([[x, y]], mode);
+    e.currentTarget.setPointerCapture(e.pointerId);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (drawMode && lastPos.current) {
       const x = Math.floor(e.clientX / 8);
       const y = Math.floor(e.clientY / 8);
@@ -118,45 +119,13 @@ const GridBackground: React.FC = () => {
     }
   };
 
-  const handleMouseUp = () => {
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.releasePointerCapture(e.pointerId);
     setDrawMode(null);
     lastPos.current = null;
   };
 
-  const handleMouseLeave = () => {
-    setDrawMode(null);
-    lastPos.current = null;
-  };
-
-  // Touch event handlers
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.preventDefault(); // Prevent scrolling while drawing
-    const touch = e.touches[0];
-    const x = Math.floor(touch.clientX / 8);
-    const y = Math.floor(touch.clientY / 8);
-    const key = `${x},${y}`;
-    const mode = cellsRef.current.has(key) ? 'remove' : 'add';
-    setDrawMode(mode);
-    lastPos.current = { x, y };
-    updateCells([[x, y]], mode);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    if (drawMode && lastPos.current) {
-      const touch = e.touches[0];
-      const x = Math.floor(touch.clientX / 8);
-      const y = Math.floor(touch.clientY / 8);
-
-      if (x !== lastPos.current.x || y !== lastPos.current.y) {
-        const points = getPointsOnLine(lastPos.current.x, lastPos.current.y, x, y);
-        updateCells(points, drawMode);
-        lastPos.current = { x, y };
-      }
-    }
-  };
-
-  const handleTouchEnd = () => {
+  const handlePointerCancel = () => {
     setDrawMode(null);
     lastPos.current = null;
   };
@@ -165,15 +134,11 @@ const GridBackground: React.FC = () => {
 
   return (
     <div
-      className="fixed inset-0"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd}
+      className="fixed inset-0 touch-none"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
       style={{
         height: '100dvh',
         width: '100vw',
