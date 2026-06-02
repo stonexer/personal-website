@@ -1,0 +1,44 @@
+Personal Website - Tianxin Shi (ST[one]X)
+
+OWNER: Tianxin Shi
+HANDLE: SToneX (stylized as ST[one]X)
+CONTACTS: WeChat ID "stonexer", X/Twitter @TianxinShi
+
+TECH STACK:
+- Astro 5 (static site framework)
+- React 18 (interactive components)
+- TailwindCSS 3 (styling)
+- TypeScript
+
+ARCHITECTURE:
+Single-page application with draggable retro-styled windows on a grid background. Windows use z-ordering for focus management.
+
+MAIN SECTIONS (as RetroWindow components):
+
+1. Welcome Window
+   - Personal introduction
+   - Social links (WeChat, X/Twitter)
+   - Focus: AI-assisted coding projects
+
+2. Archived V1
+   - iframe embedding previous website version (v1.sitixi.com)
+   - Resizable window (420x420px default, 300x360px minimum)
+
+3. Vinyl Player
+   - Interactive vinyl record player UI
+   - Plays looping audio: "The Moon Got Tangled in the Branches"
+   - Animated spinning record when playing
+   - Retro turntable design with tonearm control
+
+4. Go Game (9x9)
+   - Fully functional Go/Weiqi implementation
+   - 9x9 board size
+   - Stone placement, capture logic, liberty counting
+   - Pass and reset controls
+   - Capture counting for both players
+
+DESIGN AESTHETIC:
+Retro/vintage computing theme with draggable windows, beige/brown color palette, pixel-aligned shadows, and grid background reminiscent of 1980s-90s operating systems.
+
+PURPOSE:
+Personal portfolio showcasing interactive web development skills, AI-assisted coding workflow, and playful retro design sensibilities.
