@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 760 296" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, Menlo, monospace" font-size="11">
+            <rect width="760" height="296" fill="#fff"/>
+
+            <defs>
+              <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9a9a92"/>
+              </marker>
+            </defs>
+
+            <text x="200" y="32" text-anchor="middle" fill="#6f9bb8" font-size="12" font-weight="600">专用 Read 工具</text>
+            <text x="560" y="32" text-anchor="middle" fill="#b88a4a" font-size="12" font-weight="600">通用 Shell</text>
+            <line x1="380" y1="22" x2="380" y2="246" stroke="#e8e8e2"/>
+
+            <rect x="42" y="54" width="316" height="48" fill="#eef4f8" stroke="#6f9bb8"/>
+            <text x="200" y="75" text-anchor="middle" fill="#1a1a1a">read(file, offset, limit)</text>
+            <text x="200" y="91" text-anchor="middle" fill="#7a7a7a" font-size="10">显式表达"我要读文件"</text>
+
+            <rect x="402" y="54" width="316" height="48" fill="#f5ecdc" stroke="#b88a4a"/>
+            <text x="560" y="75" text-anchor="middle" fill="#1a1a1a">cat / sed / head foo.rs</text>
+            <text x="560" y="91" text-anchor="middle" fill="#7a7a7a" font-size="10">模型只调用执行命令工具</text>
+
+            <g stroke="#9a9a92" stroke-width="1.2" marker-end="url(#a2)">
+              <line x1="200" y1="102" x2="200" y2="120"/>
+              <line x1="560" y1="102" x2="560" y2="120"/>
+            </g>
+
+            <rect x="42" y="122" width="316" height="56" fill="#fff" stroke="#a5c0d8"/>
+            <text x="200" y="144" text-anchor="middle" fill="#4a4a4a">读取专属策略</text>
+            <text x="200" y="162" text-anchor="middle" fill="#7a7a7a" font-size="10">范围限制 / 超限提示 / 路径兜底</text>
+
+            <rect x="402" y="122" width="316" height="56" fill="#fff" stroke="#d8c890"/>
+            <text x="560" y="144" text-anchor="middle" fill="#4a4a4a">通用命令输出策略</text>
+            <text x="560" y="162" text-anchor="middle" fill="#7a7a7a" font-size="10">统一截断 / 保留头尾 / 更少工具</text>
+
+            <g stroke="#9a9a92" stroke-width="1.2" marker-end="url(#a2)">
+              <line x1="200" y1="178" x2="200" y2="196"/>
+              <line x1="560" y1="178" x2="560" y2="196"/>
+            </g>
+
+            <rect x="42" y="198" width="316" height="40" fill="#e3ecdf" stroke="#6b8862"/>
+            <text x="200" y="223" text-anchor="middle" fill="#6b8862" font-weight="600">更可控，也更专门</text>
+
+            <rect x="402" y="198" width="316" height="40" fill="#eef4f8" stroke="#6f9bb8"/>
+            <text x="560" y="215" text-anchor="middle" fill="#6f9bb8" font-weight="600">更通用，也更依赖兜底</text>
+            <text x="560" y="230" text-anchor="middle" fill="#7a7a7a" font-size="9.5">Codex 再将命令显示为 Read 操作</text>
+
+            <text x="42" y="272" fill="#7a7a7a" font-size="10.5">区别不在界面是否出现 "Read"，而在系统有没有机会为"读文件"单独设计行为。</text>
+          </svg>
