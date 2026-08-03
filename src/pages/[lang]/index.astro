@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostRow from '../../components/PostRow.astro';
+import { formatDate, useTranslations, type Lang } from '../../i18n/ui';
+import { getPosts, readingMinutes } from '../../i18n/posts';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'zh' } }];
+}
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const posts = await getPosts(lang);
+const latest = posts[0];
+
+// The search / link-preview description is assembled from the same strings the
+// intro renders, so there is only one place to edit and the two cannot drift.
+const names = projects.map((project) => project.name);
+const nameList =
+  names.length > 1
+    ? names.slice(0, -1).join(t('home.intro.sep')) + t('home.intro.and') + names[names.length - 1]
+    : (names[0] ?? '');
+const intro = `${t('home.intro.before')}${nameList}${t('home.intro.after')}`;
+---
+
+<BaseLayout lang={lang} description={intro}>
+  <p class="mb-8">
+    {t('home.intro.before')}{
+      projects.map((project, i) => (
+        <>
+          {i > 0 && (i === projects.length - 1 ? t('home.intro.and') : t('home.intro.sep'))}
+          <a class="ruled" href={project.url}>
+            {project.name}
+          </a>
+        </>
+      ))
+    }{t('home.intro.after')}
+  </p>
+
+  <p class="label">{t('home.building')}</p>
+
+  {
+    projects.map((project) => (
+      <div class="mb-[1.1rem] last:mb-0">
+        <a href={project.url} class="flex items-baseline gap-2.5 no-underline">
+          <span class="ruled font-medium">{project.name}</span>
+          <span class="meta whitespace-nowrap">
+            {t('home.since')} {project.since}
+          </span>
+        </a>
+        <p class="mt-0.5 text-muted">{project.blurb[lang]}</p>
+      </div>
+    ))
+  }
+
+  {
+    latest && (
+      <>
+        <hr />
+
+        <p class="label">{t('home.latest')}</p>
+
+        <a href={`/${lang}/blog/${latest.data.slug}/`} class="block no-underline group">
+          <h2 class="m-0 mb-0.5 text-[20.76px] font-medium leading-snug group-hover:underline group-hover:underline-offset-[3px]">
+            {latest.data.title}
+          </h2>
+          <div class="meta mb-1.5">
+            <time datetime={latest.data.pubDate.toISOString()}>
+              {formatDate(latest.data.pubDate, lang)}
+            </time>
+            {' · '}
+            {readingMinutes(latest)} {t('post.readingTime')}
+          </div>
+          {/* Descriptions run long, so the excerpt is clamped and the cue sits
+              on its own line rather than being truncated away with it. */}
+          <p class="m-0 text-muted">
+            <span class="line-clamp-2">{latest.data.description}</span>
+            <span class="whitespace-nowrap">{t('home.keepReading')}</span>
+          </p>
+        </a>
+      </>
+    )
+  }
+
+  <hr />
+
+  <p class="label">{t('home.writing')}</p>
+
+  {
+    posts.length === 0 ? (
+      <p class="text-muted">{t('post.empty')}</p>
+    ) : (
+      <ul class="m-0 list-none p-0">
+        {posts.map((post) => (
+          <PostRow post={post} lang={lang} />
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

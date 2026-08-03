@@ -1,8 +1,4 @@
 ---
-import App from '../components/App';
-import Layout from '../layouts/Layout.astro';
+import { defaultLang } from '../i18n/ui';
+return Astro.redirect(`/${defaultLang}/`);
 ---
-
-<Layout>
-	<App client:load />
-</Layout>

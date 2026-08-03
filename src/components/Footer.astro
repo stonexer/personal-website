@@ -1,0 +1,22 @@
+---
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+// The note is optional, and an empty string should leave no gap behind.
+const note = t('footer.followNote');
+---
+
+<footer class="mx-auto mt-10 max-w-measure border-t border-border pb-20 pt-10">
+  <h2 class="m-0 mb-0.5 text-[20.76px] font-medium">{t('footer.follow')}</h2>
+  {note && <p class="m-0 text-muted">{note}</p>}
+  <p class="mt-1.5">
+    <a class="ruled" href="https://x.com/TianxinShi">X</a>,
+    <a class="ruled" href="https://github.com/stonexer">GitHub</a>,
+    <a class="ruled" href="mailto:shitianxin@gmail.com">{t('footer.email')}</a>
+  </p>
+</footer>

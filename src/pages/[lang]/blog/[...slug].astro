@@ -1,0 +1,68 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { formatDate, useTranslations, type Lang } from '../../../i18n/ui';
+import { getPosts, getTranslation, postLang } from '../../../i18n/posts';
+
+export async function getStaticPaths() {
+  const langs: Lang[] = ['en', 'zh'];
+  const paths = [];
+  for (const lang of langs) {
+    const posts = await getPosts(lang);
+    for (const post of posts) {
+      paths.push({
+        params: { lang, slug: post.data.slug },
+        props: { post },
+      });
+    }
+  }
+  return paths;
+}
+
+const { post } = Astro.props;
+const lang = postLang(post);
+const otherLang: Lang = lang === 'en' ? 'zh' : 'en';
+const t = useTranslations(lang);
+const { Content } = await render(post);
+
+// Link the language toggle to the translation if it exists, otherwise to
+// the other language's homepage (these old posts are Chinese-only).
+const translation = await getTranslation(post, otherLang);
+const altUrl = translation
+  ? `/${otherLang}/blog/${translation.data.slug}/`
+  : `/${otherLang}/`;
+---
+
+<BaseLayout
+  lang={lang}
+  title={post.data.title}
+  description={post.data.description}
+  altUrl={altUrl}
+>
+  <a href={`/${lang}/`} class="meta no-underline transition-colors hover:text-fg">
+    {t('post.backToHome')}
+  </a>
+
+  <article class="mt-8">
+    <header class="mb-8">
+      <h1 class="m-0 text-[28px] font-medium leading-tight">{post.data.title}</h1>
+      <div class="meta mt-2">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {formatDate(post.data.pubDate, lang)}
+        </time>
+        {
+          post.data.updatedDate && (
+            <span>
+              {' · '}
+              {t('post.updated')} {formatDate(post.data.updatedDate, lang)}
+            </span>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="prose-bw">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

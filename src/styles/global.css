@@ -2,27 +2,198 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
 @layer base {
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  /*
+   * "linen" — a warm paper that holds its warmth without going yellow.
+   * The text and rule neutrals sit on the same hue as the background so the
+   * page reads as one material rather than grey type on a tinted sheet.
+   */
+  :root {
+    --bg: oklch(0.976 0.011 82);
+    --tx: oklch(0.22 0.009 82);
+    --tx-2: oklch(0.53 0.01 82);
+    --tx-3: oklch(0.77 0.01 82);
+    --ui: oklch(0.925 0.013 82);
+    --divider: oklch(0.62 0.01 82 / 0.3);
+  }
+
+  html.dark {
+    --bg: oklch(0.168 0.006 82);
+    --tx: oklch(0.87 0.008 82);
+    --tx-2: oklch(0.61 0.009 82);
+    --tx-3: oklch(0.43 0.009 82);
+    --ui: oklch(0.265 0.008 82);
+    --divider: oklch(0.62 0.009 82 / 0.32);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Hide the scrollbar but keep scrolling (Firefox / old Edge). */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Hide the scrollbar but keep scrolling (WebKit / Chrome / Safari). */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
   }
 
   body {
     margin: 0;
-    background-color: #f7f3ea;
-    color: #111111;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--tx);
+    /* Reading size is set here, not on <html>, so rem utilities stay 16px-based. */
+    font-size: 18.2px;
+    line-height: 1.5;
+    font-feature-settings: 'kern';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Chinese needs a little less size and a lot more leading than Latin. */
+  html[lang='zh'] body {
+    font-size: 17px;
+    line-height: 1.72;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: var(--ui);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--divider);
+    margin: 40px 0;
+  }
+}
+
+@layer components {
+  /* A muted section label — the only heading device on the homepage. */
+  .label {
+    color: var(--tx-2);
+    margin-bottom: 0.5rem;
+  }
+
+  .label a {
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .label a:hover {
+    color: var(--tx);
+  }
+
+  /* Links that carry a rule under them, the way the writing list does. */
+  .ruled {
+    text-decoration: underline;
+    text-decoration-color: var(--tx-3);
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s ease;
+  }
+
+  .ruled:hover {
+    text-decoration-color: var(--tx);
+  }
+
+  .meta {
+    color: var(--tx-2);
+    font-size: 0.82em;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Long-form reading: links are underlined, no accent colours. */
+@layer components {
+  .prose-bw {
+    @apply prose prose-neutral max-w-none dark:prose-invert;
+    --tw-prose-body: var(--tx);
+    --tw-prose-headings: var(--tx);
+    --tw-prose-links: var(--tx);
+    --tw-prose-bold: var(--tx);
+    --tw-prose-quotes: var(--tx-2);
+    --tw-prose-code: var(--tx);
+    --tw-prose-hr: var(--divider);
+    --tw-prose-quote-borders: var(--divider);
+    font-size: 1em;
+  }
+
+  .prose-bw :where(a):not(:where([class~='not-prose'] *)) {
+    text-decoration-color: var(--tx-3);
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s ease;
+  }
+
+  .prose-bw :where(a):not(:where([class~='not-prose'] *)):hover {
+    text-decoration-color: var(--tx);
+  }
+
+  /* The code plate stays the page's own material; Shiki only colours tokens. */
+  .prose-bw :where(pre):not(:where([class~='not-prose'] *)),
+  .prose-bw .astro-code {
+    background: var(--ui) !important;
+    color: var(--tx);
+    border: 1px solid var(--divider);
+    font-size: 0.8em;
+    line-height: 1.65;
+  }
+
+  .prose-bw .astro-code span {
+    color: var(--shiki-light);
+  }
+
+  html.dark .prose-bw .astro-code span {
+    color: var(--shiki-dark);
+  }
+
+  /* Typography wraps inline code in literal backticks and blockquotes in
+     smart quotes. Both read as noise here, and neither survives Chinese. */
+  .prose-bw :where(code)::before,
+  .prose-bw :where(code)::after,
+  .prose-bw :where(blockquote p:first-of-type)::before,
+  .prose-bw :where(blockquote p:last-of-type)::after {
+    content: none;
+  }
+
+  .prose-bw :where(code):not(:where([class~='not-prose'] *)) {
+    background: var(--ui);
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: 400;
+    font-size: 0.86em;
+  }
+
+  .prose-bw :where(pre code):not(:where([class~='not-prose'] *)) {
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* Callouts. Italic is a Latin device; CJK only gets a synthetic slant. */
+  .prose-bw :where(blockquote):not(:where([class~='not-prose'] *)) {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--tx-2);
+  }
+
+  /* Figures carry their own white plate, so they need a frame in both themes. */
+  .prose-bw :where(img):not(:where([class~='not-prose'] *)) {
+    border: 1px solid var(--divider);
+  }
+
+  /* The italic line right after a figure is its caption. */
+  .prose-bw :where(p > em:only-child):not(:where([class~='not-prose'] *)) {
+    display: block;
+    margin-top: -0.75em;
+    font-size: 0.82em;
+    font-style: normal;
+    color: var(--tx-2);
   }
 }

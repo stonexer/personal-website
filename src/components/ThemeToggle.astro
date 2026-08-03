@@ -1,0 +1,94 @@
+---
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<button id="theme-toggle" type="button" role="switch" aria-label={label} title={label}>
+  <span class="glyph sun" aria-hidden="true">☀</span>
+  <span class="glyph moon" aria-hidden="true">☾</span>
+</button>
+
+<style>
+  button {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    flex: none;
+    width: 42px;
+    height: 24px;
+    border-radius: 12px;
+    background: var(--ui);
+    transition: background 0.2s ease;
+  }
+
+  /* The knob. */
+  button::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+    transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  :global(html.dark) button::after {
+    transform: translateX(18px);
+  }
+
+  /* Only the glyph opposite the knob shows, so the pill never looks crowded. */
+  .glyph {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    line-height: 1;
+    color: var(--tx-2);
+  }
+
+  .sun {
+    right: 7px;
+  }
+
+  .moon {
+    left: 7px;
+    display: none;
+  }
+
+  :global(html.dark) .sun {
+    display: none;
+  }
+
+  :global(html.dark) .moon {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    button,
+    button::after {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    const root = document.documentElement;
+    const sync = () => btn.setAttribute('aria-checked', String(root.classList.contains('dark')));
+    sync();
+    btn.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      sync();
+    });
+  })();
+</script>

@@ -1,0 +1,35 @@
+---
+import { languages, useTranslations, type Lang } from '../i18n/ui';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  lang: Lang;
+  // Explicit URL for the other language. Pages that know whether a
+  // translation exists pass this so we never link to a 404.
+  altUrl?: string;
+}
+
+const { lang, altUrl } = Astro.props;
+const t = useTranslations(lang);
+const home = `/${lang}/`;
+
+const otherLang: Lang = lang === 'en' ? 'zh' : 'en';
+// Fall back to a naive locale-segment swap (correct for the homepage and
+// any future paired pages) when the page didn't supply an explicit altUrl.
+const altPath =
+  altUrl ?? Astro.url.pathname.replace(/^\/(en|zh)(?=\/|$)/, `/${otherLang}`);
+---
+
+<header class="mx-auto flex max-w-measure items-center gap-4 pb-12 pt-9">
+  <span class="min-w-0 flex-1">
+    <a href={home} class="no-underline">{t('site.title')}</a>
+  </span>
+  <a
+    href={altPath}
+    class="text-muted no-underline transition-colors hover:text-fg"
+    aria-label="Switch language"
+  >
+    {languages[otherLang]}
+  </a>
+  <ThemeToggle label={t('theme.toggle')} />
+</header>

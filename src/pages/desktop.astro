@@ -1,0 +1,44 @@
+---
+// Hidden easter egg: the original retro-desktop homepage, preserved.
+// No link points here, reachable only by visiting /desktop directly.
+import App from '../components/App';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="noindex" />
+    <title>SToneX · Desktop</title>
+    <script is:inline>
+      // Clean up the Service Worker / caches left by the very old homepage.
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((regs) => {
+          regs.forEach((reg) => reg.unregister());
+        });
+      }
+      if (window.caches) {
+        caches.keys().then((keys) => keys.forEach((key) => caches.delete(key)));
+      }
+    </script>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        margin: 0;
+        background-color: #f7f3ea;
+        color: #111111;
+      }
+    </style>
+  </head>
+  <body>
+    <App client:load />
+  </body>
+</html>

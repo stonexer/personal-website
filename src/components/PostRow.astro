@@ -1,0 +1,21 @@
+---
+import { formatStamp, type Lang } from '../i18n/ui';
+import type { Post } from '../i18n/posts';
+
+interface Props {
+  post: Post;
+  lang: Lang;
+}
+
+const { post, lang } = Astro.props;
+const href = `/${lang}/blog/${post.data.slug}/`;
+---
+
+<li class="my-1">
+  <a href={href} class="flex items-baseline gap-2.5 no-underline">
+    <time datetime={post.data.pubDate.toISOString()} class="meta flex-none whitespace-nowrap">
+      {formatStamp(post.data.pubDate)}
+    </time>
+    <span class="ruled">{post.data.title}</span>
+  </a>
+</li>
