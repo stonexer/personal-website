@@ -1,4 +1,29 @@
 ---
+// Fallback only. On Netlify, public/_redirects sends "/" to "/en/" with a real
+// 301 before this file is ever served. This exists so the bare domain still
+// works on a host without redirect rules (and under `astro preview`).
+//
+// Deliberately not Astro.redirect(): in a static build that emits a meta
+// refresh with a 2 second delay, which parks the visitor on a blank page.
 import { defaultLang } from '../i18n/ui';
-return Astro.redirect(`/${defaultLang}/`);
+
+const target = `/${defaultLang}/`;
 ---
+
+<!doctype html>
+<html lang={defaultLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={new URL(target, Astro.site).href} />
+    <title>SToneX</title>
+    <!-- replace() rather than assign() so Back does not bounce off this page -->
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target);
+    </script>
+  </head>
+  <body>
+    <a href={target}>SToneX</a>
+  </body>
+</html>

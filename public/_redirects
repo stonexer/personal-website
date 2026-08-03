@@ -1,0 +1,8 @@
+# Real HTTP 301 for the bare domain. Astro's static build also emits an
+# index.html at "/", so the trailing "!" is required to make this rule win
+# over that file. Without it Netlify serves the file and no redirect happens.
+/                 /en/    301!
+
+# To send Chinese-preference browsers to /zh/ instead, put this line ABOVE
+# the rule above (first match wins):
+#   /               /zh/    301!  Language=zh

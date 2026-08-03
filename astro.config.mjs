@@ -11,6 +11,10 @@ export default defineConfig({
 		defaultLocale: 'en',
 		routing: {
 			prefixDefaultLocale: true,
+			// Astro's own root redirect is a meta refresh with a 2 second delay.
+			// Turning it off lets src/pages/index.astro handle "/" instantly, and
+			// lets public/_redirects issue a real 301 on Netlify.
+			redirectToDefaultLocale: false,
 		},
 	},
 	markdown: {
