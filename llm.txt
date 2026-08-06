@@ -1,0 +1,24 @@
+# sitixi.com
+
+> Personal website of Tianxin Shi (ST_one_X)
+
+## About
+
+This is Tianxin Shi's personal website, featuring an interactive retro-style interface with draggable windows. Built with Astro, React, and Tailwind CSS.
+
+## Main Sections
+
+- **Welcome**: Introduction with social links (WeChat: stonexer, X: @TianxinShi)
+- **Vinyl Player**: Interactive music player component
+- **Go Game**: 9x9 Go board game implementation
+- **Archived V1**: Previous version of the site (v1.sitixi.com)
+
+## Key Links
+
+- X (Twitter): https://x.com/TianxinShi
+- WeChat ID: stonexer
+- Archived site: https://v1.sitixi.com
+
+## Tech Stack
+
+Astro, React, TypeScript, Tailwind CSS
