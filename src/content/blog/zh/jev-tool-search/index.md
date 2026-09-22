@@ -1,5 +1,5 @@
 ---
-title: "How Jev Won 9× as Often in TReg’s Search"
+title: "How Jev Won 9× as Often in treg’s Search"
 description: "treg 如何用 Jev 改进几千个工具的搜索：从词法召回、候选判断，到通过 agent 后续调用评估真实效果。"
 pubDate: '2026-09-22'
 slug: 'jev-tool-search'

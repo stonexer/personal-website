@@ -1,5 +1,5 @@
 ---
-title: "How Jev Won 9× as Often in TReg’s Search"
+title: "How Jev Won 9× as Often in treg’s Search"
 description: "How we added Jev to treg’s tool search and measured the results through agents’ next calls, with roughly nine interleaving wins for every lexical-search win."
 pubDate: '2026-09-22'
 slug: 'jev-tool-search'
