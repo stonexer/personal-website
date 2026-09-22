@@ -204,7 +204,7 @@ Rejecting all 30 candidates doesn’t establish that the catalog has no suitable
 
 And some intent never makes it into the query. “Find a person” may not say whether the agent needs a profile or an email. Jev can only judge what the query and candidate descriptions tell it.
 
-## 尾巴
+## One Last Thing
 
 This experiment showed us how agents actually look for tools, including problems we would have missed by inspecting result lists alone. We’ll keep reviewing candidates we filtered out, improving vocabulary coverage, and making it clearer when a tool is only a general alternative.
 
