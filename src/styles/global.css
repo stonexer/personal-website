@@ -208,3 +208,52 @@
     color: var(--tx-2);
   }
 }
+
+/* Jev article figures retain the original SVG layouts and responsive variants. */
+.jev-figure {
+  --surface: #fff;
+  --ink: #1b2430;
+  --muted: #5c6773;
+  --line: #d6dbe2;
+  --judged: #0e6c8a;
+  --judged-soft: #ddeef4;
+  --lex: #a9691a;
+  --lex-soft: #f6e8d3;
+  --code-bg: #eef1f4;
+  margin: 30px 0 34px;
+}
+html.dark .jev-figure {
+  --surface: #161c24;
+  --ink: #e6eaee;
+  --muted: #9aa5b0;
+  --line: #2a333d;
+  --judged: #55b8d4;
+  --judged-soft: #123a48;
+  --lex: #e0a64f;
+  --lex-soft: #3e2e12;
+  --code-bg: #1c242d;
+}
+.jev-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.jev-figure:not(.jev-figure-wide) svg { border-radius: 10px; }
+.jev-figure .illustration-mobile { display: none; }
+.jev-figure figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--tx-2);
+}
+.jev-figure figcaption b { color: var(--tx); font-weight: 500; }
+.jev-diagram-scroll { max-width: 100%; overflow-x: auto; }
+.jev-diagram-scroll:focus-visible { outline: 2px solid var(--judged); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .jev-figure .illustration-desktop { display: none; }
+  .jev-figure .illustration-mobile { display: block; }
+  .jev-diagram-scroll svg { min-width: 640px; }
+}
