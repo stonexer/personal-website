@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 638" role="img" aria-labelledby="title"><title id="title">两份结果，交错展示</title>
+<rect width="640" height="100%" fill="#faf9f6"/>
+<g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" fill="#292824">
+<text x="28" y="45" font-size="24" font-weight="600">两份结果，交错展示</text>
+<rect x="28" y="80" width="584" height="100" rx="5" fill="#f0e8db"/>
+<text x="46" y="107" font-size="16" fill="#77572c" font-weight="600">原词法列表</text>
+<text x="46" y="136" font-size="22">1. Instagram 帖子  2. LinkedIn 帖子</text>
+<text x="46" y="162" font-size="18" fill="#65635c">通用网页抓取工具没有出现在展示列表里。</text>
+<rect x="28" y="198" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="225" font-size="16" fill="#30594a" font-weight="600">Jev 列表</text>
+<text x="46" y="254" font-size="22">1. anyapi 网页抓取  2. dataforseo HTML</text>
+<text x="46" y="280" font-size="18" fill="#65635c">放宽召回后保留两条通用工具。</text>
+<rect x="28" y="316" width="584" height="100" rx="5" fill="#eeede8"/>
+<text x="46" y="343" font-size="16" fill="#45443f" font-weight="600">一组交错顺序示意</text>
+<text x="46" y="372" font-size="22">anyapi → Instagram → LinkedIn → dataforseo</text>
+<text x="46" y="398" font-size="18" fill="#65635c">第一轮 Jev 先选，第二轮词法先选。</text>
+<rect x="28" y="434" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="461" font-size="16" fill="#30594a" font-weight="600">agent 随后调用</text>
+<text x="46" y="490" font-size="22">anyapi.web.scrape</text>
+<text x="46" y="516" font-size="18" fill="#65635c">只有 Jev 列表包含它，这一分归 Jev。</text>
+<text x="28" y="593" font-size="17" fill="#65635c">根据实际网页抓取案例简化。</text>
+</g></svg>

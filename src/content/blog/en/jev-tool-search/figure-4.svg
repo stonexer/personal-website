@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 638" role="img" aria-labelledby="title"><title id="title">Two lists, one interleaved result</title>
+<rect width="640" height="100%" fill="#faf9f6"/>
+<g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" fill="#292824">
+<text x="28" y="45" font-size="24" font-weight="600">Two lists, one interleaved result</text>
+<rect x="28" y="80" width="584" height="100" rx="5" fill="#f0e8db"/>
+<text x="46" y="107" font-size="16" fill="#77572c" font-weight="600">Original lexical list</text>
+<text x="46" y="136" font-size="22">1. Instagram posts · 2. LinkedIn posts</text>
+<text x="46" y="162" font-size="18" fill="#65635c">General web scraping tools were not shown.</text>
+<rect x="28" y="198" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="225" font-size="16" fill="#30594a" font-weight="600">Jev list</text>
+<text x="46" y="254" font-size="22">1. anyapi web scraper · 2. dataforseo HTML</text>
+<text x="46" y="280" font-size="18" fill="#65635c">Two general tools retained after broader retrieval.</text>
+<rect x="28" y="316" width="584" height="100" rx="5" fill="#eeede8"/>
+<text x="46" y="343" font-size="16" fill="#45443f" font-weight="600">Illustrative draft order</text>
+<text x="46" y="372" font-size="22">anyapi → Instagram → LinkedIn → dataforseo</text>
+<text x="46" y="398" font-size="18" fill="#65635c">Jev picks first in round 1; lexical picks first in round 2.</text>
+<rect x="28" y="434" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="461" font-size="16" fill="#30594a" font-weight="600">Next call</text>
+<text x="46" y="490" font-size="22">anyapi.web.scrape</text>
+<text x="46" y="516" font-size="18" fill="#65635c">Only the Jev list contained it: Jev gets the point.</text>
+<text x="28" y="593" font-size="17" fill="#65635c">A simplified presentation of an actual web scraping query.</text>
+</g></svg>

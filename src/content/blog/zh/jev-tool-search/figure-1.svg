@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-labelledby="title"><title id="title">一个任务，从搜索到调用</title>
+<rect width="640" height="100%" fill="#faf9f6"/>
+<g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" fill="#292824">
+<text x="28" y="45" font-size="24" font-weight="600">一个任务，从搜索到调用</text>
+<rect x="28" y="80" width="584" height="100" rx="5" fill="#eeede8"/>
+<text x="46" y="107" font-size="16" fill="#45443f" font-weight="600">01 · 描述任务</text>
+<text x="46" y="136" font-size="22">“抓取这个网页，返回网页内容”</text>
+<text x="46" y="162" font-size="18" fill="#65635c">agent 用手头的任务描述搜索。</text>
+<rect x="28" y="198" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="225" font-size="16" fill="#30594a" font-weight="600">02 · 在 treg 里找</text>
+<text x="46" y="254" font-size="22">返回相关工具</text>
+<text x="46" y="280" font-size="18" fill="#65635c">通用网页抓取、原始 HTML 抓取。</text>
+<rect x="28" y="316" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="343" font-size="16" fill="#30594a" font-weight="600">03 · 选中并调用</text>
+<text x="46" y="372" font-size="22">anyapi.web.scrape</text>
+<text x="46" y="398" font-size="18" fill="#65635c">agent 拿到结果后继续任务。</text>
+<text x="28" y="475" font-size="17" fill="#65635c">搜索提供候选，agent 决定调用哪个工具。</text>
+</g></svg>

@@ -176,6 +176,17 @@
     font-size: inherit;
   }
 
+  /* Tool identifiers and wide tables must fit a narrow reading column. */
+  .prose-bw :where(code):not(pre code) {
+    overflow-wrap: anywhere;
+  }
+
+  .prose-bw :where(table) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
   /* Callouts. Italic is a Latin device; CJK only gets a synthetic slant. */
   .prose-bw :where(blockquote):not(:where([class~='not-prose'] *)) {
     font-style: normal;

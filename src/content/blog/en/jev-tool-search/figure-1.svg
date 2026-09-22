@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-labelledby="title"><title id="title">From a task to a tool call</title>
+<rect width="640" height="100%" fill="#faf9f6"/>
+<g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" fill="#292824">
+<text x="28" y="45" font-size="24" font-weight="600">From a task to a tool call</text>
+<rect x="28" y="80" width="584" height="100" rx="5" fill="#eeede8"/>
+<text x="46" y="107" font-size="16" fill="#45443f" font-weight="600">01 · Task</text>
+<text x="46" y="136" font-size="22">“Fetch the contents of this webpage.”</text>
+<text x="46" y="162" font-size="18" fill="#65635c">The agent searches with its task description.</text>
+<rect x="28" y="198" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="225" font-size="16" fill="#30594a" font-weight="600">02 · Search</text>
+<text x="46" y="254" font-size="22">treg returns relevant tools</text>
+<text x="46" y="280" font-size="18" fill="#65635c">General web scraping and raw HTML tools.</text>
+<rect x="28" y="316" width="584" height="100" rx="5" fill="#e6eeea"/>
+<text x="46" y="343" font-size="16" fill="#30594a" font-weight="600">03 · Call</text>
+<text x="46" y="372" font-size="22">anyapi.web.scrape</text>
+<text x="46" y="398" font-size="18" fill="#65635c">The agent uses the result to continue its task.</text>
+<text x="28" y="475" font-size="17" fill="#65635c">Search supplies candidates. The agent chooses what to call.</text>
+</g></svg>
